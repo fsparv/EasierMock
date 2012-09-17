@@ -1,0 +1,10 @@
+bin
+build
+extras
+.classpath
+.gradle
+.project
+.settings
+*.class
+*.MF
+*~

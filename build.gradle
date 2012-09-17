@@ -1,0 +1,12 @@
+apply plugin: 'java'
+
+sourceCompatibility = 1.7
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+    compile "junit:junit-dep:4.10:"
+    compile "org.easymock:easymock:3.1"
+}
