@@ -13,21 +13,48 @@ dependencies {
     compile 'org.easymock:easymock:3.1'
 }
 
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allJava
+}
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}
+
 jar {
     from 'LICENSE.txt'
     rename '(LICENSE.txt)', 'META-INF/$1'
 }
 
-jar {
-    manifest {
-        attributes(
-            'Implementation-Title': 'easier-test',
-            'Implementation-Version': version,
-            'Build-Timestamp': getTimestamp(),
-            'Build-Jdk': getJdk(),
-            'Build-Tool': GradleVersion.current()
-        )
-    }
+sourcesJar {
+    from 'LICENSE.txt'
+    rename '(LICENSE.txt)', 'META-INF/$1'
+}
+
+javadocJar {
+    from 'LICENSE.txt'
+    rename '(LICENSE.txt)', 'META-INF/$1'
+}
+
+jar.manifest.attributes getManifestAttributes()
+sourcesJar.manifest.attributes getManifestAttributes()
+javadocJar.manifest.attributes getManifestAttributes()
+
+def getManifestAttributes() {
+    Map<String,String> attrs = new LinkedHashMap<>();
+    attrs.put('Implementation-Title', 'easier-test')
+    attrs.put('Implementation-Version', version)
+    attrs.put('Build-Timestamp', getTimestamp())
+    attrs.put('Build-Jdk', getJdk())
+    attrs.put('Build-Tool', GradleVersion.current())
+    return attrs
 }
 
 def getTimestamp() {
