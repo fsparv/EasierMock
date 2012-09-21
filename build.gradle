@@ -49,7 +49,7 @@ javadocJar.manifest.attributes getManifestAttributes()
 
 def getManifestAttributes() {
     Map<String,String> attrs = new LinkedHashMap<>();
-    attrs.put('Implementation-Title', 'easier-test')
+    attrs.put('Implementation-Title', project.name)
     attrs.put('Implementation-Version', version)
     attrs.put('Build-Timestamp', getTimestamp())
     attrs.put('Build-Jdk', getJdk())
