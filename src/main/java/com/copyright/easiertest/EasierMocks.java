@@ -51,15 +51,21 @@ import java.util.List;
  * 
  * @author gheck
  */
+
+/*
+  Changes vs original Copyright (as per license requirement):
+  Java 6 compatible syntax changes - Copyright Needham Software 2013
+ */
+
 public class EasierMocks {
 
-    private static ThreadLocal<List<Object>> sMocks = new ThreadLocal<>();
+    private static ThreadLocal<List<Object>> sMocks = new ThreadLocal<List<Object>>();
 
-    private static ThreadLocal<List<Object>> sNiceMocks = new ThreadLocal<>();
+    private static ThreadLocal<List<Object>> sNiceMocks = new ThreadLocal<List<Object>>();
 
-    private static ThreadLocal<MockStates> sState = new ThreadLocal<>();
+    private static ThreadLocal<MockStates> sState = new ThreadLocal<MockStates>();
 
-    private static ThreadLocal<Field> sObjectUnderTest = new ThreadLocal<>();
+    private static ThreadLocal<Field> sObjectUnderTest = new ThreadLocal<Field>();
 
     private EasierMocks() {
     }
@@ -94,7 +100,9 @@ public class EasierMocks {
                 mockList.add(mock);
                 f.setAccessible(true);
                 f.set(o, mock);
-            } catch (IllegalArgumentException | IllegalAccessException e) {
+            } catch (IllegalArgumentException e) {
+                throw new RuntimeException(e);
+            } catch (IllegalAccessException e) {
                 throw new RuntimeException(e);
             }
         }
@@ -134,7 +142,9 @@ public class EasierMocks {
             mockList.add(mock);
             try {
                 testObjField.set(o, mock);
-            } catch (IllegalArgumentException | IllegalAccessException e) {
+            } catch (IllegalArgumentException e) {
+                throw new RuntimeException(e);
+            } catch (IllegalAccessException e) {
                 throw new RuntimeException(e);
             }
         }
