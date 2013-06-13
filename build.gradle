@@ -9,7 +9,7 @@ compileJava {
     targetCompatibility = 1.6
 }
 
-version = '1.0'
+version = '1.0.1-LOCAL'
 group = 'com.needhamsoftware'
 
 ext.isSnapshot = version.endsWith('-SNAPSHOT')
