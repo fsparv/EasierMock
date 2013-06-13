@@ -1,14 +1,105 @@
+import java.text.SimpleDateFormat
+
 apply plugin: 'java'
-apply plugin: 'eclipse'
+apply plugin: 'maven'
+apply plugin: 'signing'
 
 compileJava {
-  sourceCompatibility = 1.6
-  targetCompatibility = 1.6
+    sourceCompatibility = 1.6
+    targetCompatibility = 1.6
 }
-version = 1.0
+
+version = '1.0-SNAPSHOT'
+group = 'com.needhamsoftware'
+
+ext.isSnapshot = version.endsWith('-SNAPSHOT')
+ext.isLocal = version.endsWith('-LOCAL')
+ext.isRelease = !( isLocal || isSnapshot)
+
+ext.releaseRepo = 'https://oss.sonatype.org/service/local/staging/deploy/maven2'
+ext.snapshotRepo = 'https://oss.sonatype.org/content/repositories/snapshots'
+ext.testingRepo = 'file:///tmp/myRepo/'
+ext.uploadRepo = isRelease ? releaseRepo : ( isSnapshot ? snapshotRepo : testingRepo )
 
 repositories {
-  mavenCentral()
+    mavenCentral()
+}
+
+// A little idiot proofing...
+task(checkUploadDest) << {
+    if (gradle.taskGraph.hasTask(':uploadRelease')) {
+        if (isSnapshot) {
+            ant.fail('Release should not have suffix of -SNAPSHOT')
+        }
+        if (isLocal) {
+            ant.fail('Release should not have suffix of -LOCAL')
+        }
+    } else if (gradle.taskGraph.hasTask(':uploadSnapshot')) {
+        if (!isSnapshot) {
+            ant.fail('Snapshot should have suffix of SNAPSHOT')
+        }
+    } else {
+        if(!isLocal) {
+            ant.fail('This is not a local version, ' +
+                    'please use either uploadRelease or uploadSnapshot, or change the version suffix to -LOCAL')
+        }
+    }
+}
+
+ext.isLocalVersion = !version.endsWith("LOCAL")
+
+signing {
+    required { !isLocalVersion && gradle.taskGraph.hasTask('uploadArchives') }
+    sign configurations.archives
+}
+
+uploadArchives {
+    it.dependsOn checkUploadDest
+    repositories {
+        mavenDeployer {
+            beforeDeployment { deployment -> signing.signPom(deployment) }
+            repository(url: project.uploadRepo) {
+                authentication(userName: sonatypeUsername, password: sonatypePassword)
+            }
+            pom.project {
+                parent {
+                    groupId 'org.sonatype.oss'
+                    artifactId 'oss-parent'
+                    //noinspection GroovyAssignabilityCheck
+                    version '7'
+                }
+                name 'easier-mock'
+                description 'An add on to EasyMock to make EasyMock even Easier'
+                url 'https://github.com/fsparv/EasierMock'
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        distribution 'repo'
+                    }
+                }
+                scm {
+                    connection 'scm:git:git@github.com:fsparv/EasierMock.git'
+                    developerConnection 'scm:git:git@github.com:fsparv/EasierMock.git'
+                    url 'git@github.com:fsparv/EasierMock.git'
+                }
+                developers {
+                    developer {
+                        id 'nsoft'
+                        name 'Patrick Heck'
+                        email 'gus@needhamsoftware.com'
+                    }
+                }
+            }
+            pom.withXml { root ->
+                def children = root.asNode().children()
+                def versionIndex = children.indexOf(children.find { it.name().localPart == 'version' })
+                // Stuff that sonatype wants... there may be a way to make these appear automatically but...
+                // http://issues.gradle.org/browse/GRADLE-1285
+                children.add(versionIndex + 1, new Node(null, 'packaging', 'jar'))
+            }
+        }
+    }
 }
 
 dependencies {
@@ -25,6 +116,9 @@ task javadocJar(type: Jar) {
     classifier = 'javadoc'
     from javadoc
 }
+
+task(uploadSnapshot, dependsOn: uploadArchives) << {}
+task(uploadRelease, dependsOn: uploadArchives) << {}
 
 artifacts {
     archives sourcesJar
@@ -50,8 +144,9 @@ jar.manifest.attributes getManifestAttributes()
 sourcesJar.manifest.attributes getManifestAttributes()
 javadocJar.manifest.attributes getManifestAttributes()
 
+@SuppressWarnings("GroovyAssignabilityCheck")
 def getManifestAttributes() {
-    Map<String,String> attrs = new LinkedHashMap<>();
+    Map<String, String> attrs = new LinkedHashMap<>();
     attrs.put('Implementation-Title', project.name)
     attrs.put('Implementation-Version', version)
     attrs.put('Build-Timestamp', getTimestamp())
@@ -61,11 +156,12 @@ def getManifestAttributes() {
 }
 
 def getTimestamp() {
-    def dt = new java.util.Date()
-    def df = new java.text.SimpleDateFormat('yyyy-MM-dd HH:mm:ss', Locale.ENGLISH)
+    def dt = new Date()
+    def df = new SimpleDateFormat('yyyy-MM-dd HH:mm:ss', Locale.ENGLISH)
     df.format(dt)
 }
 
 def getJdk() {
     "${System.getProperty('java.version')} (${System.getProperty('java.vm.vendor')} ${System.getProperty('java.vm.version')})"
 }
+

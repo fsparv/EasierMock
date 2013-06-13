@@ -25,20 +25,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6b629d7-269d-4022-aed5-3c32be06d329" name="Default" comment="Java 6 support requires code change because oracle/sun made the target attribute require a matching source attribute.">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/cglib_nodep_2_2_2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/easier-test.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/easymock_3_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/hamcrest_core_1_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/junit_dep_4_10.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/objenesis_1_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/copyright/easiertest/EasierMocks.java" afterPath="$PROJECT_DIR$/src/main/java/com/copyright/easiertest/EasierMocks.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gusheck-easier-test.iml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings.gradle" afterPath="$PROJECT_DIR$/settings.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="gusheck-easier-test.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="e6b629d7-269d-4022-aed5-3c32be06d329" time="1368203621207" ignored="false" />
+    <file path="/Dummy.txt" changelist="e6b629d7-269d-4022-aed5-3c32be06d329" time="1371064354642" ignored="false" />
     <file path="/EasierMocks.java" changelist="e6b629d7-269d-4022-aed5-3c32be06d329" time="1368204621919" ignored="false" />
+    <file path="/build.gradle" changelist="e6b629d7-269d-4022-aed5-3c32be06d329" time="1371156104749" ignored="false" />
+    <file path="$USER_HOME$/clients/kmw/projects/answr/code/answr-gus/api/build.gradle" changelist="e6b629d7-269d-4022-aed5-3c32be06d329" time="1371156225771" ignored="false" />
+    <file path="$USER_HOME$/clients/kmw/projects/answr/code/answr-gus/api/api.iml" changelist="e6b629d7-269d-4022-aed5-3c32be06d329" time="1370962788123" ignored="false" />
+    <file path="$USER_HOME$/clients/kmw/projects/answr/code/answr-gus/api/src/main/java/RecommendationService.java" changelist="e6b629d7-269d-4022-aed5-3c32be06d329" time="1370962864835" ignored="false" />
+    <file path="/RecommendationService.java" changelist="e6b629d7-269d-4022-aed5-3c32be06d329" time="1370963254764" ignored="false" />
+    <file path="/fragment.java" changelist="e6b629d7-269d-4022-aed5-3c32be06d329" time="1370963018376" ignored="false" />
+    <file path="$USER_HOME$/clients/kmw/projects/answr/code/answr-gus/api/src/main/java/com/answr/RecommendationService.java" changelist="e6b629d7-269d-4022-aed5-3c32be06d329" time="1370963000466" ignored="false" />
+    <file path="$USER_HOME$/clients/kmw/projects/answr/code/answr-gus/api/src/main/java/com/answr/servlet/RecommendationService.java" changelist="e6b629d7-269d-4022-aed5-3c32be06d329" time="1370964590029" ignored="false" />
+    <file path="$USER_HOME$/clients/kmw/projects/answr/code/answr-gus/api/src/main/java/com/answr/model/Reccomendation.java" changelist="e6b629d7-269d-4022-aed5-3c32be06d329" time="1371046932088" ignored="false" />
+    <file path="/Reccomendation.java" changelist="e6b629d7-269d-4022-aed5-3c32be06d329" time="1371048649854" ignored="false" />
+    <file path="$USER_HOME$/clients/kmw/projects/answr/code/answr-gus/api/src/main/java/com/answr/model/Rating.java" changelist="e6b629d7-269d-4022-aed5-3c32be06d329" time="1371049466982" ignored="false" />
+    <file path="$USER_HOME$/clients/kmw/projects/answr/code/answr-gus/api/src/main/java/com/answr/model/Comment.java" changelist="e6b629d7-269d-4022-aed5-3c32be06d329" time="1371048956537" ignored="false" />
+    <file path="/Comment.java" changelist="e6b629d7-269d-4022-aed5-3c32be06d329" time="1371048956537" ignored="false" />
+    <file path="$USER_HOME$/clients/kmw/projects/answr/code/answr-gus/api/src/main/java/com/answr/model/Extract.java" changelist="e6b629d7-269d-4022-aed5-3c32be06d329" time="1371048867146" ignored="false" />
+    <file path="/Extract.java" changelist="e6b629d7-269d-4022-aed5-3c32be06d329" time="1371048866207" ignored="false" />
+    <file path="$USER_HOME$/clients/kmw/projects/answr/code/answr-gus/api/src/main/java/com/answr/model/Resource.java" changelist="e6b629d7-269d-4022-aed5-3c32be06d329" time="1371048722913" ignored="false" />
+    <file path="$USER_HOME$/clients/kmw/projects/answr/code/answr-gus/api/src/main/java/com/answr/model/User.java" changelist="e6b629d7-269d-4022-aed5-3c32be06d329" time="1371052970336" ignored="false" />
+    <file path="/User.java" changelist="e6b629d7-269d-4022-aed5-3c32be06d329" time="1371052757450" ignored="false" />
+    <file path="/Rating.java" changelist="e6b629d7-269d-4022-aed5-3c32be06d329" time="1371049465420" ignored="false" />
+    <file path="$USER_HOME$/clients/kmw/projects/answr/code/answr-gus/api/src/main/java/META-INF/persistence.xml" changelist="e6b629d7-269d-4022-aed5-3c32be06d329" time="1371050110210" ignored="false" />
+    <file path="/a.sql" changelist="e6b629d7-269d-4022-aed5-3c32be06d329" time="1371053310894" ignored="false" />
+    <file path="$USER_HOME$/clients/kmw/projects/answr/code/answr-gus/search/build.gradle" changelist="e6b629d7-269d-4022-aed5-3c32be06d329" time="1371140168611" ignored="false" />
+    <file path="/a.dummy" changelist="e6b629d7-269d-4022-aed5-3c32be06d329" time="1371153636994" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +72,7 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -89,7 +109,6 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -111,7 +130,7 @@
       <file leaf-file-name="profiles_settings.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.idea/copyright/profiles_settings.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -121,28 +140,43 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/copyright/easiertest/AnnotatedElementAction.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="27" column="13" selection-start="866" selection-end="866" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#0#1090#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EasierMocks.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="EasierMocks.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/copyright/easiertest/EasierMocks.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="53" column="0" selection-start="1319" selection-end="1909" vertical-scroll-proportion="0.28481013">
-              <folding>
-                <element signature="e#0#7511#0" expanded="true" />
-                <element signature="e#2146#2160#0" expanded="true" />
-                <element signature="e#2238#2252#0" expanded="true" />
-                <element signature="e#2324#2336#0" expanded="true" />
-                <element signature="e#2413#2420#0" expanded="true" />
-                <element signature="e#2605#2613#0" expanded="true" />
-                <element signature="e#2666#2674#0" expanded="true" />
-                <element signature="e#2835#2842#0" expanded="true" />
-                <element signature="e#2894#2901#0" expanded="true" />
-              </folding>
+            <state line="53" column="0" selection-start="1319" selection-end="1909" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="build.gradle" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="10" column="0" selection-start="179" selection-end="179" vertical-scroll-proportion="-0.9401496">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="settings.gradle" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/settings.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="31" selection-start="31" selection-end="31" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Node.class" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/tools/gradle-1.4/lib/groovy-all-1.8.6.jar!/groovy/util/Node.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="15" column="0" selection-start="488" selection-end="488" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -203,6 +237,10 @@
           <option name="name" value="compileTestJava" />
         </GradleTaskDescriptor>
         <GradleTaskDescriptor>
+          <option name="description" value="Does a maven install of the archives artifacts into the local .m2 cache." />
+          <option name="name" value="install" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
           <option name="description" value="Assembles a jar archive containing the main classes." />
           <option name="name" value="jar" />
         </GradleTaskDescriptor>
@@ -222,6 +260,9 @@
           <option name="name" value="processTestResources" />
         </GradleTaskDescriptor>
         <GradleTaskDescriptor>
+          <option name="name" value="signArchives" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
           <option name="name" value="sourcesJar" />
         </GradleTaskDescriptor>
         <GradleTaskDescriptor>
@@ -231,6 +272,16 @@
         <GradleTaskDescriptor>
           <option name="description" value="Assembles the test classes." />
           <option name="name" value="testClasses" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Uploads all artifacts belonging to configuration ':archives'" />
+          <option name="name" value="uploadArchives" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="uploadRelease" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="uploadSnapshot" />
         </GradleTaskDescriptor>
       </set>
     </option>
@@ -246,6 +297,14 @@
       <list>
         <GradleTaskDescriptor>
           <option name="executorId" value="Run" />
+          <option name="name" value="uploadSnapshot" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="executorId" value="Run" />
+          <option name="name" value="uploadArchives" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="executorId" value="Run" />
           <option name="name" value="jar" />
         </GradleTaskDescriptor>
       </list>
@@ -255,12 +314,15 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/src/main/java/com/copyright/easiertest/EasierMocks.java" />
+        <option value="$PROJECT_DIR$/settings.gradle" />
+        <option value="$PROJECT_DIR$/build.gradle" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
+    <option name="y" value="22" />
     <option name="width" value="1440" />
-    <option name="height" value="900" />
+    <option name="height" value="874" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -288,6 +350,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -306,67 +369,8 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="easier-test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gusheck-easier-test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="easiertest" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="easier-test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gusheck-easier-test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value=".idea" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="easier-test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gusheck-easier-test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value=".idea" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="copyright" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -383,20 +387,46 @@
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="FullScreen" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
-    <property name="FullScreen" value="true" />
     <property name="gradle.tool.window.active" value="Tasks" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="dynamic.classpath" value="false" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
+    <property name="dynamic.classpath" value="false" />
   </component>
-  <component name="RunManager" selected="Groovy.gradle:jar">
+  <component name="RunManager" selected="Groovy.gradle:uploadSnapshot">
     <configuration default="false" name="gradle:jar" type="GroovyScriptRunConfiguration" factoryName="Groovy" temporary="true">
       <module name="easier-test" />
       <setting name="path" value="file://$PROJECT_DIR$/build.gradle" />
       <setting name="vmparams" value="" />
       <setting name="params" value="jar" />
+      <setting name="workDir" value="file://$PROJECT_DIR$" />
+      <setting name="debug" value="false" />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method>
+        <option name="Make" enabled="false" />
+      </method>
+    </configuration>
+    <configuration default="false" name="gradle:uploadArchives" type="GroovyScriptRunConfiguration" factoryName="Groovy" temporary="true">
+      <module name="easier-test" />
+      <setting name="path" value="file://$PROJECT_DIR$/build.gradle" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="uploadArchives" />
+      <setting name="workDir" value="file://$PROJECT_DIR$" />
+      <setting name="debug" value="false" />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method>
+        <option name="Make" enabled="false" />
+      </method>
+    </configuration>
+    <configuration default="false" name="gradle:uploadSnapshot" type="GroovyScriptRunConfiguration" factoryName="Groovy" temporary="true">
+      <module name="easier-test" />
+      <setting name="path" value="file://$PROJECT_DIR$/build.gradle" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="uploadSnapshot" />
       <setting name="workDir" value="file://$PROJECT_DIR$" />
       <setting name="debug" value="false" />
       <RunnerSettings RunnerId="Run" />
@@ -471,12 +501,16 @@
       <patterns />
       <method />
     </configuration>
-    <list size="1">
+    <list size="3">
       <item index="0" class="java.lang.String" itemvalue="Groovy.gradle:jar" />
+      <item index="1" class="java.lang.String" itemvalue="Groovy.gradle:uploadArchives" />
+      <item index="2" class="java.lang.String" itemvalue="Groovy.gradle:uploadSnapshot" />
     </list>
     <recent_temporary>
-      <list size="1">
-        <item index="0" class="java.lang.String" itemvalue="Groovy.gradle:jar" />
+      <list size="3">
+        <item index="0" class="java.lang.String" itemvalue="Groovy.gradle:uploadSnapshot" />
+        <item index="1" class="java.lang.String" itemvalue="Groovy.gradle:uploadArchives" />
+        <item index="2" class="java.lang.String" itemvalue="Groovy.gradle:jar" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
@@ -494,35 +528,36 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
+    <frame x="0" y="22" width="1440" height="874" extended-state="6" />
+    <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32917705" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32998565" sideWeight="0.6708229" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3501326" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19870876" sideWeight="0.64986736" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32891247" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TeamCity" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329602" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="TeamCity" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="IvyIDEA" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24964131" sideWeight="0.6708229" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32917705" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24964131" sideWeight="0.64986736" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32891247" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329602" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -593,6 +628,34 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/java/com/copyright/easiertest/BeanTester.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/copyright/profiles_settings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/copyright/easiertest/AnnotatedElementAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="13" selection-start="866" selection-end="866" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/copyright/easiertest/EasierMocks.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="53" column="0" selection-start="1319" selection-end="1909" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/copyright/easiertest/BeanTester.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state line="24" column="25" selection-start="892" selection-end="892" vertical-scroll-proportion="0.0">
           <folding />
         </state>
@@ -608,26 +671,35 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/copyright/easiertest/AnnotatedElementAction.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="27" column="13" selection-start="866" selection-end="866" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#1090#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/copyright/easiertest/EasierMocks.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="0" selection-start="1319" selection-end="1909" vertical-scroll-proportion="0.28481013">
-          <folding>
-            <element signature="e#0#7511#0" expanded="true" />
-            <element signature="e#2146#2160#0" expanded="true" />
-            <element signature="e#2238#2252#0" expanded="true" />
-            <element signature="e#2324#2336#0" expanded="true" />
-            <element signature="e#2413#2420#0" expanded="true" />
-            <element signature="e#2605#2613#0" expanded="true" />
-            <element signature="e#2666#2674#0" expanded="true" />
-            <element signature="e#2835#2842#0" expanded="true" />
-            <element signature="e#2894#2901#0" expanded="true" />
-          </folding>
+        <state line="53" column="0" selection-start="1319" selection-end="1909" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/tools/gradle-1.4/lib/groovy-all-1.8.6.jar!/groovy/util/Node.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="0" selection-start="488" selection-end="488" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/settings.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="31" selection-start="31" selection-end="31" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="0" selection-start="179" selection-end="179" vertical-scroll-proportion="-0.9401496">
+          <folding />
         </state>
       </provider>
     </entry>
