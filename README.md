@@ -21,7 +21,7 @@ For example to test that addNode properly sets sets itself as the parent on the 
 
 
     public class TestNode {
-      private Node node;
+      private Node node = new Node();
       @Mock private Node child;
 
       public TestNode() {
