@@ -1,6 +1,8 @@
 Easier Mock
 ===========
 
+[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=fsparv&url=https://github.com/fsparv/EasierMock&title=EasierMock&language=&tags=github&category=software)
+
 This is a small add on to the wonderful [EasyMock](http://www.easymock.org/) library. Although easy mock is relatively
 slick and was a big improvement in terms of ease of setup for mock objects, I have chosen a particular usage pattern
 and boiled away the remaining boiler plate code using annotations. You may use it according to the terms of the
