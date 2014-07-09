@@ -3,6 +3,9 @@
   <component name="EntryPointsManager">
     <entry_points version="2.0" />
   </component>
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$" />
+  </component>
   <component name="IdProvider" IDEtalkID="39248851E2DC3E88DF112CC0801B157B" />
   <component name="IvyIDEA.ProjectSettings">
     <option name="artifactTypeSettings">
