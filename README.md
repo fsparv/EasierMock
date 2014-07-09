@@ -6,7 +6,8 @@ Easier Mock
 This is a small add on to the wonderful [EasyMock](http://www.easymock.org/) library. Although easy mock is relatively
 slick and was a big improvement in terms of ease of setup for mock objects, I have chosen a particular usage pattern
 and boiled away the remaining boiler plate code using annotations. You may use it according to the terms of the
-Apache Software Licesnse version 2.0 (see LICENSE.txt for details)
+Apache Software Licesnse version 2.0 (see LICENSE.txt for details). The examples below are written for Junit
+but recent tests seem to indicate that everything except Beantester.java works on TestNG as well.
 
 Installation
 -----
