@@ -15,12 +15,12 @@ group = 'com.needhamsoftware'
 
 ext.isSnapshot = version.endsWith('-SNAPSHOT')
 ext.isLocal = version.endsWith('-LOCAL')
-ext.isRelease = !( isLocal || isSnapshot)
+ext.isRelease = !(isLocal || isSnapshot)
 
 ext.releaseRepo = 'https://oss.sonatype.org/service/local/staging/deploy/maven2'
 ext.snapshotRepo = 'https://oss.sonatype.org/content/repositories/snapshots'
 ext.testingRepo = 'file:///tmp/myRepo/'
-ext.uploadRepo = isRelease ? releaseRepo : ( isSnapshot ? snapshotRepo : testingRepo )
+ext.uploadRepo = isRelease ? releaseRepo : (isSnapshot ? snapshotRepo : testingRepo)
 
 repositories {
     mavenCentral()
@@ -40,7 +40,7 @@ task(checkUploadDest) << {
             ant.fail('Snapshot should have suffix of SNAPSHOT')
         }
     } else {
-        if(!isLocal) {
+        if (!isLocal) {
             ant.fail('This is not a local version, ' +
                     'please use either uploadRelease or uploadSnapshot, or change the version suffix to -LOCAL')
         }
@@ -104,9 +104,10 @@ uploadArchives {
 }
 
 dependencies {
-    compile 'junit:junit-dep:4.10'
     compile 'org.easymock:easymock:3.1'
+    compile 'junit:junit-dep:4.10' // req as compile by BeanTester only.
 
+    testCompile 'org.testng:testng:6.8.8'
     testCompile 'org.powermock:powermock-module-junit4:1.5'
     testCompile 'org.powermock:powermock-api-easymock:1.5'
     testCompile 'com.google.guava:guava:14.0.1'
@@ -179,3 +180,7 @@ def getJdk() {
     "${System.getProperty('java.version')} (${System.getProperty('java.vm.vendor')} ${System.getProperty('java.vm.version')})"
 }
 
+task testng(type: Test)
+testng.useTestNG()
+
+test.dependsOn 'testng'
