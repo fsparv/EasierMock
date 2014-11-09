@@ -14,7 +14,7 @@ Installation
 Simply list us as a dependency in your gradle/ivy/maven build that points at mavenCentral()
 
     dependencies {
-       testCompile 'com.needhamsoftware:easier-test:1.0'
+       testCompile 'com.needhamsoftware:easier-mock:1.0'
     }
 
 
