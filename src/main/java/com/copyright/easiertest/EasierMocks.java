@@ -16,14 +16,13 @@
 
 package com.copyright.easiertest;
 
-import net.sf.cglib.proxy.Callback;
-import net.sf.cglib.proxy.Enhancer;
-import net.sf.cglib.proxy.Factory;
-import net.sf.cglib.proxy.MethodInterceptor;
-import net.sf.cglib.proxy.MethodProxy;
-
 import org.easymock.EasyMock;
-import org.easymock.internal.ClassExtensionHelper;
+import org.easymock.cglib.proxy.Callback;
+import org.easymock.cglib.proxy.Enhancer;
+import org.easymock.cglib.proxy.Factory;
+import org.easymock.cglib.proxy.MethodInterceptor;
+import org.easymock.cglib.proxy.MethodProxy;
+import org.easymock.internal.ClassProxyFactory;
 import org.easymock.internal.ClassProxyFactory.MockMethodInterceptor;
 
 import java.lang.annotation.Annotation;
@@ -128,7 +127,15 @@ public class EasierMocks {
       if (Proxy.isProxyClass(mock.getClass())) {
         handler = Proxy.getInvocationHandler(mock);
       } else if (Enhancer.isEnhanced(mock.getClass())) {
-        handler = ClassExtensionHelper.getInterceptor(mock).getHandler();
+        try {
+          Field f = MockMethodInterceptor.class.getDeclaredField("handler");
+          f.setAccessible(true);
+          handler = (InvocationHandler) f.get(mock.getCallback(0));
+        } catch (NoSuchFieldException e) {
+          throw new RuntimeException("crap handler field changed (probably means you tried to upgrade easymock to a version that is not yet supported)");
+        } catch (IllegalAccessException e) {
+          throw new RuntimeException("Something blocked us from accessing the handler field.");
+        }
       } else {
         throw new IllegalArgumentException("Not a mock: " + mock.getClass().getName());
       }
@@ -183,12 +190,10 @@ public class EasierMocks {
     private static final long serialVersionUID = 1L;
 
     private MethodInterceptor callback;
-    private InvocationHandler handler;
 
-    public Interceptor(Callback callback, InvocationHandler handler) {
+    Interceptor(Callback callback, InvocationHandler handler) {
       super(handler);
       this.callback = (MethodInterceptor) callback;
-      this.handler = handler;
     }
 
     @Override
@@ -200,11 +205,6 @@ public class EasierMocks {
       } else {
         return callback.intercept(obj, method, args, proxy);
       }
-    }
-
-    @Override
-    public InvocationHandler getHandler() {
-      return this.handler;
     }
 
   }
