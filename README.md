@@ -16,7 +16,9 @@ Simply list us as a dependency in your gradle/ivy/maven build that points at mav
     dependencies {
        testCompile 'com.needhamsoftware:easier-mock:2.0'
     }
-
+    
+Version 2.0 is for use with Easy mock 3.4+ (required for full support of Java 8) For use with Easymock 3.1, use 
+version 1.0. 2.0 will not work with older EasyMock versions.
 
 Examples
 --------
