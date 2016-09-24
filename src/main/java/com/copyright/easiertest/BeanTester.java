@@ -27,7 +27,6 @@ import java.util.Map;
 
 /**
  * Automates testing of simple Java Bean properties.
- * <p/>
  * <p>This class is meant to provide Get/Set testing for simple properties on Beans that conform
  * to the BeanSpecification suggested naming standards (i.e. getFoo/setFoo and isBar/setBar).
  * Indexed properties (i.e. getBaz(3) and setBaz(3, bazObj) ) are not supported. A property is
@@ -39,9 +38,9 @@ import java.util.Map;
  * corresponds to the name of the field in the class. This restriction is necessary so that
  * cases where two properties are backed by the same field, or the getter and setter don't
  * use the same field are detected as failures.
- * <p/>
+ * 
  * <p>This class only supports JUnit for the time being</p>
- * <p/>
+ * 
  * <p>Enum types and types shown in the {@link #exampleTypes} map are supported.
  *
  * @author gheck

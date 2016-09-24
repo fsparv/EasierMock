@@ -35,7 +35,6 @@ import java.util.List;
 
 /**
  * Automates creation and checking of mock objects. Normal usage is as follows:
- * <p/>
  * <ol>
  * <li>Annotate one or more fields with {@link Mock}
  * <li>Call {@link #prepareMocks(Object)} in the constructor of the test class, and pass 'this' as
