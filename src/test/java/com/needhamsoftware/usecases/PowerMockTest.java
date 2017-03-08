@@ -1,9 +1,4 @@
-package com.needhamsoftware.usecases;/*
- * Created with IntelliJ IDEA.
- * User: gus
- * Date: 6/14/13
- * Time: 12:13 PM
- */
+package com.needhamsoftware.usecases;
 
 import com.copyright.easiertest.Mock;
 import com.google.common.collect.ArrayListMultimap;

@@ -7,12 +7,14 @@ package com.needhamsoftware.usecases.testObjs;
  * Time: 12:16 PM
  */
 
-public class Node {
+public class Node implements INode {
 
-  public void setParent(Node node) {
+  @Override
+  public void setParent(INode node) {
   }
 
-  public void addNode(Node child) {
+  @Override
+  public void addNode(INode child) {
     child.setParent(this);
   }
 
