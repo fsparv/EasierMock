@@ -11,7 +11,7 @@ compileJava {
     targetCompatibility = 1.8
 }
 
-version = '2.0'
+version = '3.0-SNAPSHOT'
 group = 'com.needhamsoftware'
 
 ext.isSnapshot = version.endsWith('-SNAPSHOT')
@@ -50,10 +50,12 @@ task(checkUploadDest) << {
 
 ext.isLocalVersion = !version.endsWith("LOCAL")
 
-signing {
-    required { !isLocalVersion && gradle.taskGraph.hasTask('uploadArchives') }
-    sign configurations.archives
-}
+// Uncomment this to do sonatype uploads (fails on all other machines looking for gpg key otherwise
+//
+//signing {
+//    required { !isLocalVersion && gradle.taskGraph.hasTask('uploadArchives') }
+//    sign configurations.archives
+//}
 
 uploadArchives {
     it.dependsOn checkUploadDest
