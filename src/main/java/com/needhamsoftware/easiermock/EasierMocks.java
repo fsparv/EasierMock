@@ -14,7 +14,7 @@
  * limitations under the License.package com.copyright.rup.common.test; 
  */
 
-package com.copyright.easiertest;
+package com.needhamsoftware.easiermock;
 
 import org.easymock.EasyMock;
 import org.easymock.cglib.proxy.Callback;
@@ -22,7 +22,6 @@ import org.easymock.cglib.proxy.Enhancer;
 import org.easymock.cglib.proxy.Factory;
 import org.easymock.cglib.proxy.MethodInterceptor;
 import org.easymock.cglib.proxy.MethodProxy;
-import org.easymock.internal.ClassProxyFactory;
 import org.easymock.internal.ClassProxyFactory.MockMethodInterceptor;
 
 import java.lang.annotation.Annotation;

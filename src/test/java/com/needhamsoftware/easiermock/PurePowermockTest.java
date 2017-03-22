@@ -1,4 +1,4 @@
-package com.needhamsoftware.usecases;
+package com.needhamsoftware.easiermock;
 /*
  * Created with IntelliJ IDEA.
  * User: gus

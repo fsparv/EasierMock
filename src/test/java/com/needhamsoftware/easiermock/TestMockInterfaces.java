@@ -1,29 +1,31 @@
-package com.needhamsoftware.usecases;
+package com.needhamsoftware.easiermock;
 
-import com.copyright.easiertest.Mock;
-import com.copyright.easiertest.ObjectUnderTest;
-import com.needhamsoftware.usecases.testObjs.Node;
-import com.needhamsoftware.usecases.testObjs.NodeUsingThing;
+import com.needhamsoftware.easiermock.testObjs.INode;
+import com.needhamsoftware.easiermock.testObjs.NodeUsingThing;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static com.copyright.easiertest.EasierMocks.*;
+import static com.needhamsoftware.easiermock.EasierMocks.*;
 import static org.easymock.EasyMock.expect;
 
 /**
- * Class to make sure we don't break mocking of objects
+ * Class to make sure we don't break mocking of interfaces
  */
-public class TestMockClasses {
+@SuppressWarnings("Duplicates")
+public class TestMockInterfaces {
 
+  // to demonstrate issue #3 uncomment this and comment out the Object based one.
+  //  @ObjectUnderTest
+  //  private INodeUser thing;
   @ObjectUnderTest
   private NodeUsingThing thing;
   @Mock
-  private Node nodeObjectMock;
+  private INode nodeObjectMock;
   @Mock
-  private Node nodeObjectRootMock;
+  private INode nodeObjectRootMock;
 
-  public TestMockClasses() {
+  public TestMockInterfaces() {
     prepareMocks(this);
   }
 

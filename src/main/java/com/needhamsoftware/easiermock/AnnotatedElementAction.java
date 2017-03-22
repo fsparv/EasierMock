@@ -14,23 +14,24 @@
  * limitations under the License.package com.copyright.rup.common.test; 
  */
 
-package com.copyright.easiertest;
+package com.needhamsoftware.easiermock;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 /**
- * Designates a field that should contain a mock object. When used in conjunction with
- * {@link EasierMocks#prepareMocks(Object)} the field will be populated with a mock object that can
- * be managed with the reset() replay() and verify() methodds of EasierMocks
+ * TODO: add description
  * 
  * @author gheck
  */
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
-public @interface Mock {
+public class AnnotatedElementAction {
 
-    public boolean nice() default false;
+    public void doTo(Field f, Annotation a) {
+        // default do nothing implementation
+    }
+
+    public void doTo(Method m, Annotation a) {
+        // default do nothing implementation
+    }
 }

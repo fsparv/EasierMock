@@ -1,15 +1,14 @@
-package com.needhamsoftware.usecases;
+package com.needhamsoftware.easiermock;
 
-import com.copyright.easiertest.Mock;
 import com.google.common.collect.ArrayListMultimap;
-import com.needhamsoftware.usecases.testObjs.Node2;
+import com.needhamsoftware.easiermock.testObjs.Node2;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import static com.copyright.easiertest.EasierMocks.*;
+import static com.needhamsoftware.easiermock.EasierMocks.*;
 import static org.easymock.EasyMock.expect;
 
 @RunWith(PowerMockRunner.class)

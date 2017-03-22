@@ -1,15 +1,14 @@
-package com.needhamsoftware.usecases;/*
+package com.needhamsoftware.easiermock;/*
  * Created with IntelliJ IDEA.
  * User: gus
  * Date: 6/14/13
  * Time: 12:13 PM
  */
 
-import com.copyright.easiertest.Mock;
-import com.needhamsoftware.usecases.testObjs.Node;
+import com.needhamsoftware.easiermock.testObjs.Node;
 import org.junit.Test;
 
-import static com.copyright.easiertest.EasierMocks.*;
+import static com.needhamsoftware.easiermock.EasierMocks.*;
 
 public class SimpleTest {
 

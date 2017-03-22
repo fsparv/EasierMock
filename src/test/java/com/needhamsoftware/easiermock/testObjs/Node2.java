@@ -1,4 +1,4 @@
-package com.needhamsoftware.usecases.testObjs;
+package com.needhamsoftware.easiermock.testObjs;
 
 /*
  * Created with IntelliJ IDEA.

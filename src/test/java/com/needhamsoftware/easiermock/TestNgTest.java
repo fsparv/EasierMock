@@ -1,17 +1,15 @@
-package com.needhamsoftware.usecases;
+package com.needhamsoftware.easiermock;
 
-import com.copyright.easiertest.Mock;
-import com.copyright.easiertest.ObjectUnderTest;
-import com.needhamsoftware.usecases.testObjs.Node;
-import com.needhamsoftware.usecases.testObjs.Node3;
+import com.needhamsoftware.easiermock.testObjs.Node;
+import com.needhamsoftware.easiermock.testObjs.Node3;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
 
-import static com.copyright.easiertest.EasierMocks.prepareMocks;
-import static com.copyright.easiertest.EasierMocks.replay;
-import static com.copyright.easiertest.EasierMocks.reset;
-import static com.copyright.easiertest.EasierMocks.verify;
+import static com.needhamsoftware.easiermock.EasierMocks.prepareMocks;
+import static com.needhamsoftware.easiermock.EasierMocks.replay;
+import static com.needhamsoftware.easiermock.EasierMocks.reset;
+import static com.needhamsoftware.easiermock.EasierMocks.verify;
 import static org.easymock.EasyMock.expect;
 
 /*

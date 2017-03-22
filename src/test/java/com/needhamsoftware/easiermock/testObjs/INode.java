@@ -1,4 +1,4 @@
-package com.needhamsoftware.usecases.testObjs;
+package com.needhamsoftware.easiermock.testObjs;
 
 public interface INode {
   void setParent(INode node);

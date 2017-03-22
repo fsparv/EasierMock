@@ -14,7 +14,7 @@
  * limitations under the License.package com.copyright.rup.common.test; 
  */
 
-package com.copyright.easiertest;
+package com.needhamsoftware.easiermock;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;

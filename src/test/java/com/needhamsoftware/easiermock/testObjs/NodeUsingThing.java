@@ -1,4 +1,4 @@
-package com.needhamsoftware.usecases.testObjs;
+package com.needhamsoftware.easiermock.testObjs;
 
 /**
  * A class that does some random (not necessarily sensible) stuff with INode's
