@@ -20,6 +20,14 @@ Simply list us as a dependency in your gradle/ivy/maven build that points at mav
 Version 2.0 is for use with Easy mock 3.4+ (required for full support of Java 8) For use with Easymock 3.1, use 
 version 1.0. 2.0 will not work with older EasyMock versions.
 
+Benefits
+--------
+1. **Reduce Boilerplate** - @Mock annotation turns a field into a mock
+1. **Handles Book Keeping** - makes it easy to call reset() and verify() on ALL mocks before and after the test so that one can't loose track and not actually test something that was supposed to be tested
+1. **Specialized @ObjectUnderTest mock** - first call after reset() is an invocation of the actual method, all further calls (even inside the first invoked method) are mocked and will respond with expectations, that are set with *exactly the same syntax as any other mock*
+1. **Automatically test simple bean properties** - BeanTester.java and @SimpleProperty pevent hours of useless time covering properties, and prevent uncovered properties from trashing your (actually good) coverage statistics.
+
+
 Examples
 --------
 For example to test that addNode properly sets sets itself as the parent on the node passed to it you could do this:
