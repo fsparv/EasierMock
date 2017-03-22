@@ -49,165 +49,45 @@ import java.util.List;
 
 /*
   Changes vs original Copyright (as per license requirement):
-  Java 6 compatible syntax changes - Copyright Needham Software 2013
+  - Java 6 compatible syntax changes - Copyright Needham Software 2013
+  - moved most of contents of this class to EasyMockHelper (2017) further changes recorded there.
  */
 
+@SuppressWarnings("WeakerAccess")
 public class EasierMocks {
 
-  private static ThreadLocal<List<Object>> sMocks = new ThreadLocal<List<Object>>();
-
-  private static ThreadLocal<List<Object>> sNiceMocks = new ThreadLocal<List<Object>>();
-
-  private static ThreadLocal<MockStates> sState = new ThreadLocal<MockStates>();
-
-  private static ThreadLocal<Field> sObjectUnderTest = new ThreadLocal<Field>();
+  private static final MockHelper EASY_MOCK = new EasyMockHelper();
+  private static final MockHelper MOCKITO = new MockitoHelper();
 
   private EasierMocks() {
   }
 
   public static void prepareMocks(Object o) {
-    sState.set(MockStates.AWAIT_EXPECTATIONS);
-
-    List<Object> mockList = new ArrayList<Object>();
-    List<Object> niceMockList = new ArrayList<Object>();
-    sMocks.set(mockList);
-    sNiceMocks.set(niceMockList);
-    sObjectUnderTest.set(null);
-
-    final List<Field> niceFields = new ArrayList<Field>();
-    final List<Field> fields = new ArrayList<Field>();
-    AnnotatedElementAction record = new AnnotatedElementAction() {
-
-      @Override
-      public void doTo(Field f, Annotation a) {
-        recordField(niceFields, fields, f, a);
-      }
-    };
-
-    AnnotationUtil.doToAnnotatedElement(o, record, Mock.class);
-    for (Field f : fields) {
-      try {
-        Object mock = org.easymock.EasyMock.createMock(f.getType());
-        if (niceFields.contains(f)) {
-          mock = org.easymock.EasyMock.createNiceMock(f.getType());
-          niceMockList.add(mock);
-        }
-        mockList.add(mock);
-        f.setAccessible(true);
-        f.set(o, mock);
-      } catch (IllegalArgumentException e) {
-        throw new RuntimeException(e);
-      } catch (IllegalAccessException e) {
-        throw new RuntimeException(e);
-      }
-    }
-
-    AnnotatedElementAction prepareTestObj = new AnnotatedElementAction() {
-
-      @Override
-      public void doTo(Field f, Annotation a) {
-        sObjectUnderTest.set(f);
-      }
-
-    };
-
-    AnnotationUtil.doToAnnotatedElement(o, prepareTestObj, ObjectUnderTest.class);
-    Field testObjField = sObjectUnderTest.get();
-    if (testObjField != null) {
-      testObjField.setAccessible(true);
-      Factory mock = (Factory) org.easymock.EasyMock.createMock(testObjField.getType());
-      InvocationHandler handler;
-
-      // if block lifted from easymock ClassExtensionHelper.getControl()
-      // We need to be sure that when ClassExtensionHelper runs this and
-      // gets our interceptor instead of the regular one it gets the same
-      // answer.
-      if (Proxy.isProxyClass(mock.getClass())) {
-        handler = Proxy.getInvocationHandler(mock);
-      } else if (Enhancer.isEnhanced(mock.getClass())) {
-        try {
-          Field f = MockMethodInterceptor.class.getDeclaredField("handler");
-          f.setAccessible(true);
-          handler = (InvocationHandler) f.get(mock.getCallback(0));
-        } catch (NoSuchFieldException e) {
-          throw new RuntimeException("crap handler field changed (probably means you tried to upgrade easymock to a version that is not yet supported)");
-        } catch (IllegalAccessException e) {
-          throw new RuntimeException("Something blocked us from accessing the handler field.");
-        }
-      } else {
-        throw new IllegalArgumentException("Not a mock: " + mock.getClass().getName());
-      }
-
-      // easy mock always sets one method intercepter callback. If they change that
-      // this breaks...
-      Interceptor customInterceptor = new Interceptor(mock.getCallback(0), handler);
-      mock.setCallback(0, customInterceptor);
-      mockList.add(mock);
-      try {
-        testObjField.set(o, mock);
-      } catch (IllegalArgumentException e) {
-        throw new RuntimeException(e);
-      } catch (IllegalAccessException e) {
-        throw new RuntimeException(e);
-      }
-    }
-  }
-
-  static void recordField(List<Field> niceFields, List<Field> fields, Field f, Annotation a) {
-    fields.add(f);
-    if (((Mock) a).nice()) {
-      niceFields.add(f);
-    }
+    chooseHelper().prepareMocks(o);
   }
 
   public static void reset() {
-    sState.set(MockStates.AWAIT_EXPECTATIONS);
-    EasyMock.resetToDefault(mocks());
-    EasyMock.resetToNice(niceMocks());
+    chooseHelper().reset();
   }
 
   public static void replay() {
-    EasyMock.replay(mocks());
-    sState.set(MockStates.AWAIT_METHOD_UNDER_TEST);
+    chooseHelper().replay();
   }
 
   public static void verify() {
-    EasyMock.verify(mocks());
+    chooseHelper().verify();
   }
 
-  private static Object[] mocks() {
-    return sMocks.get().toArray();
-  }
-
-  private static Object[] niceMocks() {
-    return sNiceMocks.get().toArray();
-  }
-
-  private static final class Interceptor extends MockMethodInterceptor {
-
-    private static final long serialVersionUID = 1L;
-
-    private MethodInterceptor callback;
-
-    Interceptor(Callback callback, InvocationHandler handler) {
-      super(handler);
-      this.callback = (MethodInterceptor) callback;
+  private static MockHelper chooseHelper() {
+    // todo: actual logic to determine which one we should be using.
+    if (1 == 1) {
+      return EASY_MOCK;
+    } else {
+      return MOCKITO;
     }
-
-    @Override
-    public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy)
-        throws Throwable {
-      if (sState.get() == MockStates.AWAIT_METHOD_UNDER_TEST) {
-        sState.set(MockStates.TESTING);
-        return proxy.invokeSuper(obj, args);
-      } else {
-        return callback.intercept(obj, method, args, proxy);
-      }
-    }
-
   }
 
-  private enum MockStates {
+  enum MockStates {
     AWAIT_EXPECTATIONS,
     AWAIT_METHOD_UNDER_TEST,
     TESTING

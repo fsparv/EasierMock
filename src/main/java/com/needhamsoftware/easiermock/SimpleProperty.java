@@ -35,5 +35,10 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface SimpleProperty {
 
+    /**
+     * Specify the implementation class to be used if the getter or setter returns an interface
+     *
+     * @return The class of the implementation to be used for testing.
+     */
     public Class<?> testInstance() default Void.class;
 }
