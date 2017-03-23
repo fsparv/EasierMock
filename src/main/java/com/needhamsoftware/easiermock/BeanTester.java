@@ -24,6 +24,7 @@ import java.lang.reflect.Method;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 /**
  * Automates testing of simple Java Bean properties.
@@ -54,10 +55,10 @@ public class BeanTester {
 
   @SuppressWarnings("rawtypes")
   public BeanTester() {
-    this.setExampleTypes(new HashMap<Class, Object>());
+    this.setExampleTypes(new HashMap<>());
     getExampleTypes().put(Boolean.TYPE, true);
-    getExampleTypes().put(Byte.TYPE, 1);
-    getExampleTypes().put(Short.TYPE, 1);
+    getExampleTypes().put(Byte.TYPE, (byte)1);
+    getExampleTypes().put(Short.TYPE, (short)1);
     getExampleTypes().put(Character.TYPE, 'a');
     getExampleTypes().put(Integer.TYPE, 1);
     getExampleTypes().put(Long.TYPE, 1L);
@@ -65,7 +66,6 @@ public class BeanTester {
     getExampleTypes().put(Double.TYPE, 1.0);
     getExampleTypes().put(String.class, "foo");
     getExampleTypes().put(Date.class, new Date());
-
   }
 
 
@@ -206,7 +206,7 @@ public class BeanTester {
     } while (result == null && clazz != Object.class);
 
     if (result == null) {
-      throw ex;
+      throw new NoSuchFieldException(propName);
     }
 
     return result;
