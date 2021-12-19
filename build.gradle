@@ -107,13 +107,13 @@ uploadArchives {
 }
 
 dependencies {
-    compile 'org.easymock:easymock:3.4'
-    compile 'junit:junit-dep:4.10' // req as compile by BeanTester only.
+    compile 'org.easymock:easymock:4.3'
+    compile 'junit:junit-dep:4.11' // req as compile by BeanTester only.
 
-    testCompile 'org.testng:testng:6.8.8'
-    testCompile 'org.powermock:powermock-module-junit4:1.5'
-    testCompile 'org.powermock:powermock-api-easymock:1.5'
-    testCompile 'com.google.guava:guava:14.0.1'
+    testCompile 'org.testng:testng:7.4.0'
+    testCompile 'org.powermock:powermock-module-junit4:2.0.9'
+    testCompile 'org.powermock:powermock-api-easymock:2.0.9'
+    testCompile 'com.google.guava:guava:31.0.1-jre'
 }
 
 jacocoTestReport.dependsOn += test
@@ -164,7 +164,7 @@ javadocJar.manifest.attributes getManifestAttributes()
 
 @SuppressWarnings("GroovyAssignabilityCheck")
 def getManifestAttributes() {
-    Map<String, String> attrs = new LinkedHashMap<>();
+    Map<String, String> attrs = new LinkedHashMap<>()
     attrs.put('Implementation-Title', project.name)
     attrs.put('Implementation-Version', version)
     attrs.put('Build-Timestamp', getTimestamp())
