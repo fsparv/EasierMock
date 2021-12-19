@@ -2,7 +2,7 @@ import java.text.SimpleDateFormat
 
 apply plugin: 'wrapper'
 apply plugin: 'java'
-apply plugin: 'maven'
+apply plugin: 'maven-publish'
 apply plugin: 'signing'
 apply plugin: 'jacoco'
 
@@ -28,27 +28,42 @@ repositories {
 }
 
 // A little idiot proofing...
-task(checkUploadDest) << {
-    if (gradle.taskGraph.hasTask(':uploadRelease')) {
-        if (isSnapshot) {
-            ant.fail('Release should not have suffix of -SNAPSHOT')
-        }
-        if (isLocal) {
-            ant.fail('Release should not have suffix of -LOCAL')
-        }
-    } else if (gradle.taskGraph.hasTask(':uploadSnapshot')) {
-        if (!isSnapshot) {
-            ant.fail('Snapshot should have suffix of SNAPSHOT')
-        }
-    } else {
-        if (!isLocal) {
-            ant.fail('This is not a local version, ' +
-                    'please use either uploadRelease or uploadSnapshot, or change the version suffix to -LOCAL')
+task(checkUploadDest) {
+    doLast {
+        if (gradle.taskGraph.hasTask(':uploadRelease')) {
+            if (isSnapshot) {
+                ant.fail('Release should not have suffix of -SNAPSHOT')
+            }
+            if (isLocal) {
+                ant.fail('Release should not have suffix of -LOCAL')
+            }
+        } else if (gradle.taskGraph.hasTask(':uploadSnapshot')) {
+            if (!isSnapshot) {
+                ant.fail('Snapshot should have suffix of SNAPSHOT')
+            }
+        } else {
+            if (!isLocal) {
+                ant.fail('This is not a local version, ' +
+                        'please use either uploadRelease or uploadSnapshot, or change the version suffix to -LOCAL')
+            }
         }
     }
 }
 
 ext.isLocalVersion = !version.endsWith("LOCAL")
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = group
+            artifactId = 'easier-mock'
+            version = version
+
+            from components.java
+        }
+    }
+}
+
 
 // Uncomment this to do sonatype uploads (fails on all other machines looking for gpg key otherwise
 //
@@ -56,64 +71,64 @@ ext.isLocalVersion = !version.endsWith("LOCAL")
 //    required { !isLocalVersion && gradle.taskGraph.hasTask('uploadArchives') }
 //    sign configurations.archives
 //}
-
-uploadArchives {
-    it.dependsOn checkUploadDest
-    repositories {
-        mavenDeployer {
-            beforeDeployment { deployment -> signing.signPom(deployment) }
-            repository(url: project.uploadRepo) {
-                authentication(userName: sonatypeUsername, password: sonatypePassword)
-            }
-            pom.project {
-                parent {
-                    groupId 'org.sonatype.oss'
-                    artifactId 'oss-parent'
-                    //noinspection GroovyAssignabilityCheck
-                    version '7'
-                }
-                name 'easier-mock'
-                description 'An add on to EasyMock to make EasyMock even Easier'
-                url 'https://github.com/fsparv/EasierMock'
-                licenses {
-                    license {
-                        name 'The Apache Software License, Version 2.0'
-                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                        distribution 'repo'
-                    }
-                }
-                scm {
-                    connection 'scm:git:git@github.com:fsparv/EasierMock.git'
-                    developerConnection 'scm:git:git@github.com:fsparv/EasierMock.git'
-                    url 'git@github.com:fsparv/EasierMock.git'
-                }
-                developers {
-                    developer {
-                        id 'nsoft'
-                        name 'Patrick Heck'
-                        email 'gus@needhamsoftware.com'
-                    }
-                }
-            }
-            pom.withXml { root ->
-                def children = root.asNode().children()
-                def versionIndex = children.indexOf(children.find { it.name().localPart == 'version' })
-                // Stuff that sonatype wants... there may be a way to make these appear automatically but...
-                // http://issues.gradle.org/browse/GRADLE-1285
-                children.add(versionIndex + 1, new Node(null, 'packaging', 'jar'))
-            }
-        }
-    }
-}
+//
+//uploadArchives {
+//    it.dependsOn checkUploadDest
+//    repositories {
+//        mavenDeployer {
+//            beforeDeployment { deployment -> signing.signPom(deployment) }
+//            repository(url: project.uploadRepo) {
+//                authentication(userName: sonatypeUsername, password: sonatypePassword)
+//            }
+//            pom.project {
+//                parent {
+//                    groupId 'org.sonatype.oss'
+//                    artifactId 'oss-parent'
+//                    //noinspection GroovyAssignabilityCheck
+//                    version '7'
+//                }
+//                name 'easier-mock'
+//                description 'An add on to EasyMock to make EasyMock even Easier'
+//                url 'https://github.com/fsparv/EasierMock'
+//                licenses {
+//                    license {
+//                        name 'The Apache Software License, Version 2.0'
+//                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+//                        distribution 'repo'
+//                    }
+//                }
+//                scm {
+//                    connection 'scm:git:git@github.com:fsparv/EasierMock.git'
+//                    developerConnection 'scm:git:git@github.com:fsparv/EasierMock.git'
+//                    url 'git@github.com:fsparv/EasierMock.git'
+//                }
+//                developers {
+//                    developer {
+//                        id 'nsoft'
+//                        name 'Patrick Heck'
+//                        email 'gus@needhamsoftware.com'
+//                    }
+//                }
+//            }
+//            pom.withXml { root ->
+//                def children = root.asNode().children()
+//                def versionIndex = children.indexOf(children.find { it.name().localPart == 'version' })
+//                // Stuff that sonatype wants... there may be a way to make these appear automatically but...
+//                // http://issues.gradle.org/browse/GRADLE-1285
+//                children.add(versionIndex + 1, new Node(null, 'packaging', 'jar'))
+//            }
+//        }
+//    }
+//}
 
 dependencies {
-    compile 'org.easymock:easymock:4.3'
-    compile 'junit:junit-dep:4.11' // req as compile by BeanTester only.
+    implementation 'org.easymock:easymock:4.3'
+    implementation 'junit:junit-dep:4.11' // req as implementation by BeanTester only.
 
-    testCompile 'org.testng:testng:7.4.0'
-    testCompile 'org.powermock:powermock-module-junit4:2.0.9'
-    testCompile 'org.powermock:powermock-api-easymock:2.0.9'
-    testCompile 'com.google.guava:guava:31.0.1-jre'
+    testImplementation 'org.testng:testng:7.4.0'
+    testImplementation 'org.powermock:powermock-module-junit4:2.0.9'
+    testImplementation 'org.powermock:powermock-api-easymock:2.0.9'
+    testImplementation 'com.google.guava:guava:31.0.1-jre'
 }
 
 jacocoTestReport.dependsOn += test
@@ -121,22 +136,20 @@ jacocoTestReport.dependsOn += test
 jacocoTestReport {
     group = "Reporting"
     description = "Generate Jacoco coverage reports after running tests."
-    additionalSourceDirs = files(sourceSets.main.allJava.srcDirs)
+    additionalSourceDirs.from = files(sourceSets.main.allJava.srcDirs)
 }
 
 
 task sourcesJar(type: Jar) {
-    classifier = 'sources'
+    archiveClassifier = 'sources'
     from sourceSets.main.allJava
 }
 
 task javadocJar(type: Jar) {
-    classifier = 'javadoc'
+    archiveClassifier = 'javadoc'
     from javadoc
 }
 
-task(uploadSnapshot, dependsOn: uploadArchives) << {}
-task(uploadRelease, dependsOn: uploadArchives) << {}
 
 artifacts {
     archives sourcesJar
@@ -173,13 +186,13 @@ def getManifestAttributes() {
     return attrs
 }
 
-def getTimestamp() {
+static def getTimestamp() {
     def dt = new Date()
     def df = new SimpleDateFormat('yyyy-MM-dd HH:mm:ss', Locale.ENGLISH)
     df.format(dt)
 }
 
-def getJdk() {
+static def getJdk() {
     "${System.getProperty('java.version')} (${System.getProperty('java.vm.vendor')} ${System.getProperty('java.vm.version')})"
 }
 
