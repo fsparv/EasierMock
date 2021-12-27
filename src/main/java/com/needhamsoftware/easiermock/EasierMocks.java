@@ -1,5 +1,5 @@
-/* 
- * Copyright 2011-2012 Copyright Clearance Center 
+/*
+ * Copyright 2011-2012 Copyright Clearance Center
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,11 +11,13 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.package com.copyright.rup.common.test; 
+ * limitations under the License.package com.copyright.rup.common.test;
  */
 
 package com.needhamsoftware.easiermock;
 
+import net.bytebuddy.ByteBuddy;
+import net.bytebuddy.dynamic.loading.ClassLoadingStrategy;
 import org.easymock.EasyMock;
 import org.easymock.cglib.proxy.Callback;
 import org.easymock.cglib.proxy.Enhancer;
@@ -50,6 +52,8 @@ import java.util.List;
 /*
   Changes vs original Copyright (as per license requirement):
   Java 6 compatible syntax changes - Copyright Needham Software 2013
+  Support for Easymock 3.4+
+  Support for Java 8 Default interfaces.
  */
 
 public class EasierMocks {
@@ -113,9 +117,29 @@ public class EasierMocks {
 
     AnnotationUtil.doToAnnotatedElement(o, prepareTestObj, ObjectUnderTest.class);
     Field testObjField = sObjectUnderTest.get();
+
     if (testObjField != null) {
+      Class<?> type = testObjField.getType();
       testObjField.setAccessible(true);
-      Factory mock = (Factory) org.easymock.EasyMock.createMock(testObjField.getType());
+      boolean hasDefaults = false;
+      if (type.isInterface()) {
+        ArrayList<Method> defaultMethods = findDefaultMethodForInterface(type);
+        if (defaultMethods.size() > 0) {
+          hasDefaults = true;
+        }
+      }
+      if (hasDefaults) {
+        // To prevent EasyMock from creating a java.util.Proxy for which there is no hope of invoking the parent
+        // implementation of the default method, use ByteBuddy to create a concrete class first. Methods without
+        // defaults will be abstract. This will also have the nice side effect of providing an intelligible error
+        // message if it gets called in the unit test, and we wind up calling method.invoke() on it.
+        type = new ByteBuddy()
+            .subclass(type)
+            .make()
+            .load(type.getClassLoader(), ClassLoadingStrategy.Default.WRAPPER)
+            .getLoaded();
+      }
+      Factory mock = EasyMock.createMock(type);
       InvocationHandler handler;
 
       // if block lifted from easymock ClassExtensionHelper.getControl()
@@ -151,6 +175,29 @@ public class EasierMocks {
         throw new RuntimeException(e);
       }
     }
+  }
+
+  /**
+   * Find any methods with default implementations in this interface or any interface it extends.
+   *
+   * @param type The type to check
+   * @return A list of methods with default implementations or an empty list if type is null or not an interface.
+   */
+  private static ArrayList<Method> findDefaultMethodForInterface(Class<?> type) {
+    ArrayList<Method> defaultMethods = new ArrayList<>();
+    if (type != null && type.isInterface()) {
+      Class<?>[] interfaces = type.getInterfaces();
+      for (Class<?> anInterface : interfaces) {
+        defaultMethods.addAll(findDefaultMethodForInterface(anInterface));
+      }
+      Method[] methods = type.getMethods();
+      for (Method method : methods) {
+        if (method.isDefault()) {
+          defaultMethods.add(method);
+        }
+      }
+    }
+    return defaultMethods;
   }
 
   static void recordField(List<Field> niceFields, List<Field> fields, Field f, Annotation a) {
