@@ -30,7 +30,7 @@ import static org.junit.Assert.assertEquals;
 public class TestMockInterfaceWithDefault {
 
   @ObjectUnderTest
-  IDefault2 interface2;
+  private IDefault2 interface2;
 
   public TestMockInterfaceWithDefault() {
     prepareMocks(this);

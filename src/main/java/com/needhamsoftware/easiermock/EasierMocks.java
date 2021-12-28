@@ -20,7 +20,6 @@ import net.bytebuddy.ByteBuddy;
 import net.bytebuddy.dynamic.loading.ClassLoadingStrategy;
 import org.easymock.EasyMock;
 import org.easymock.cglib.proxy.Callback;
-import org.easymock.cglib.proxy.Enhancer;
 import org.easymock.cglib.proxy.Factory;
 import org.easymock.cglib.proxy.MethodInterceptor;
 import org.easymock.cglib.proxy.MethodProxy;
@@ -30,7 +29,6 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,13 +56,13 @@ import java.util.List;
 
 public class EasierMocks {
 
-  private static ThreadLocal<List<Object>> sMocks = new ThreadLocal<List<Object>>();
+  private static final ThreadLocal<List<Object>> sMocks = new ThreadLocal<>();
 
-  private static ThreadLocal<List<Object>> sNiceMocks = new ThreadLocal<List<Object>>();
+  private static final ThreadLocal<List<Object>> sNiceMocks = new ThreadLocal<>();
 
-  private static ThreadLocal<MockStates> sState = new ThreadLocal<MockStates>();
+  private static final ThreadLocal<MockStates> sState = new ThreadLocal<>();
 
-  private static ThreadLocal<Field> sObjectUnderTest = new ThreadLocal<Field>();
+  private static final ThreadLocal<Field> sObjectUnderTest = new ThreadLocal<>();
 
   private EasierMocks() {
   }
@@ -72,14 +70,14 @@ public class EasierMocks {
   public static void prepareMocks(Object o) {
     sState.set(MockStates.AWAIT_EXPECTATIONS);
 
-    List<Object> mockList = new ArrayList<Object>();
-    List<Object> niceMockList = new ArrayList<Object>();
+    List<Object> mockList = new ArrayList<>();
+    List<Object> niceMockList = new ArrayList<>();
     sMocks.set(mockList);
     sNiceMocks.set(niceMockList);
     sObjectUnderTest.set(null);
 
-    final List<Field> niceFields = new ArrayList<Field>();
-    final List<Field> fields = new ArrayList<Field>();
+    final List<Field> niceFields = new ArrayList<>();
+    final List<Field> fields = new ArrayList<>();
     AnnotatedElementAction record = new AnnotatedElementAction() {
 
       @Override
@@ -99,9 +97,7 @@ public class EasierMocks {
         mockList.add(mock);
         f.setAccessible(true);
         f.set(o, mock);
-      } catch (IllegalArgumentException e) {
-        throw new RuntimeException(e);
-      } catch (IllegalAccessException e) {
+      } catch (IllegalArgumentException | IllegalAccessException e) {
         throw new RuntimeException(e);
       }
     }
@@ -119,85 +115,52 @@ public class EasierMocks {
     Field testObjField = sObjectUnderTest.get();
 
     if (testObjField != null) {
-      Class<?> type = testObjField.getType();
-      testObjField.setAccessible(true);
-      boolean hasDefaults = false;
-      if (type.isInterface()) {
-        ArrayList<Method> defaultMethods = findDefaultMethodForInterface(type);
-        if (defaultMethods.size() > 0) {
-          hasDefaults = true;
-        }
-      }
-      if (hasDefaults) {
-        // To prevent EasyMock from creating a java.util.Proxy for which there is no hope of invoking the parent
-        // implementation of the default method, use ByteBuddy to create a concrete class first. Methods without
-        // defaults will be abstract. This will also have the nice side effect of providing an intelligible error
-        // message if it gets called in the unit test, and we wind up calling method.invoke() on it.
-        type = new ByteBuddy()
-            .subclass(type)
-            .make()
-            .load(type.getClassLoader(), ClassLoadingStrategy.Default.WRAPPER)
-            .getLoaded();
-      }
-      Factory mock = EasyMock.createMock(type);
-      InvocationHandler handler;
 
-      // if block lifted from easymock ClassExtensionHelper.getControl()
+      // To prevent EasyMock from creating a java.util.Proxy for which there is no hope of invoking the parent
+      // implementation of a default method, use ByteBuddy to create a concrete class first. Interface methods without
+      // defaults will be abstract. This will also have the nice side effect of providing an intelligible error
+      // message if it gets called in the unit test, and we wind up calling method.invoke() on it.
+      Class<?> type = dynamicSubclass(testObjField.getType());
+
+      // Now let EasyMock do its thing, which will *ALWAYS* be a cglib enhanced subclass of the above
+      // dynamic implementation produced by ByteBuddy
+      Factory mock = EasyMock.createMock(type);
+
+      // try block lifted from easymock ClassExtensionHelper.getControl()
       // We need to be sure that when ClassExtensionHelper runs this and
       // gets our interceptor instead of the regular one it gets the same
       // answer.
-      if (Proxy.isProxyClass(mock.getClass())) {
-        handler = Proxy.getInvocationHandler(mock);
-      } else if (Enhancer.isEnhanced(mock.getClass())) {
-        try {
-          Field f = MockMethodInterceptor.class.getDeclaredField("handler");
-          f.setAccessible(true);
-          handler = (InvocationHandler) f.get(mock.getCallback(0));
-        } catch (NoSuchFieldException e) {
-          throw new RuntimeException("crap handler field changed (probably means you tried to upgrade easymock to a version that is not yet supported)");
-        } catch (IllegalAccessException e) {
-          throw new RuntimeException("Something blocked us from accessing the handler field.");
-        }
-      } else {
-        throw new IllegalArgumentException("Not a mock: " + mock.getClass().getName());
+      InvocationHandler handler;
+      try {
+        Field f = MockMethodInterceptor.class.getDeclaredField("handler");
+        f.setAccessible(true);
+        handler = (InvocationHandler) f.get(mock.getCallback(0));
+      } catch (NoSuchFieldException e) {
+        throw new RuntimeException("crap handler field changed (probably means you tried to upgrade easymock to a version that is not yet supported)");
+      } catch (IllegalAccessException e) {
+        throw new RuntimeException("Something blocked us from accessing the handler field.");
       }
 
-      // easy mock always sets one method intercepter callback. If they change that
+      // easy mock always sets one method interceptor callback. If they change that
       // this breaks...
       Interceptor customInterceptor = new Interceptor(mock.getCallback(0), handler);
       mock.setCallback(0, customInterceptor);
       mockList.add(mock);
       try {
+        testObjField.setAccessible(true);
         testObjField.set(o, mock);
-      } catch (IllegalArgumentException e) {
-        throw new RuntimeException(e);
-      } catch (IllegalAccessException e) {
+      } catch (IllegalArgumentException | IllegalAccessException e) {
         throw new RuntimeException(e);
       }
     }
   }
 
-  /**
-   * Find any methods with default implementations in this interface or any interface it extends.
-   *
-   * @param type The type to check
-   * @return A list of methods with default implementations or an empty list if type is null or not an interface.
-   */
-  private static ArrayList<Method> findDefaultMethodForInterface(Class<?> type) {
-    ArrayList<Method> defaultMethods = new ArrayList<>();
-    if (type != null && type.isInterface()) {
-      Class<?>[] interfaces = type.getInterfaces();
-      for (Class<?> anInterface : interfaces) {
-        defaultMethods.addAll(findDefaultMethodForInterface(anInterface));
-      }
-      Method[] methods = type.getMethods();
-      for (Method method : methods) {
-        if (method.isDefault()) {
-          defaultMethods.add(method);
-        }
-      }
-    }
-    return defaultMethods;
+  private static Class<?> dynamicSubclass(Class<?> type1) {
+    return new ByteBuddy()
+        .subclass(type1)
+        .make()
+        .load(type1.getClassLoader(), ClassLoadingStrategy.Default.WRAPPER)
+        .getLoaded();
   }
 
   static void recordField(List<Field> niceFields, List<Field> fields, Field f, Annotation a) {
@@ -234,7 +197,7 @@ public class EasierMocks {
 
     private static final long serialVersionUID = 1L;
 
-    private MethodInterceptor callback;
+    private final MethodInterceptor callback;
 
     Interceptor(Callback callback, InvocationHandler handler) {
       super(handler);
