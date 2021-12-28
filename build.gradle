@@ -122,6 +122,7 @@ publishing {
 //}
 
 dependencies {
+    implementation 'net.bytebuddy:byte-buddy:1.12.6'
     implementation 'org.easymock:easymock:4.3'
     implementation 'junit:junit-dep:4.11' // req as implementation by BeanTester only.
 
