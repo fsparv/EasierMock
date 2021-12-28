@@ -1,5 +1,5 @@
-/* 
- * Copyright 2011-2012 Copyright Clearance Center 
+/*
+ * Copyright 2011-2012 Copyright Clearance Center
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,7 +11,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.package com.copyright.rup.common.test; 
+ * limitations under the License.package com.copyright.rup.common.test;
  */
 
 package com.needhamsoftware.easiermock;
@@ -27,13 +27,11 @@ import java.lang.annotation.Target;
  * or setter. Properties that cannot be get or set in one line (i.e. properties that provide change
  * listener support, or perform validation of input are not considered simple. Properties backed by
  * fields with names that do not match the getter or setter are not simple either.
- * 
+ *
  * @author gheck
- * 
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface SimpleProperty {
-
-    public Class<?> testInstance() default Void.class;
+  Class<?> testInstance() default Void.class;
 }

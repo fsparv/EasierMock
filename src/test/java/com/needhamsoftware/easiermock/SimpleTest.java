@@ -8,12 +8,16 @@ package com.needhamsoftware.easiermock;/*
 import com.needhamsoftware.easiermock.testObjs.Node;
 import org.junit.Test;
 
-import static com.needhamsoftware.easiermock.EasierMocks.*;
+import static com.needhamsoftware.easiermock.EasierMocks.prepareMocks;
+import static com.needhamsoftware.easiermock.EasierMocks.replay;
+import static com.needhamsoftware.easiermock.EasierMocks.reset;
+import static com.needhamsoftware.easiermock.EasierMocks.verify;
 
 public class SimpleTest {
 
-  private Node node = new Node();
-  @Mock private Node child;
+  private final Node node = new Node();
+  @Mock
+  private Node child;
 
   public SimpleTest() {
     prepareMocks(this);

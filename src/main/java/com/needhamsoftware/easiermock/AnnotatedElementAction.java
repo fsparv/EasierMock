@@ -1,5 +1,5 @@
-/* 
- * Copyright 2011-2012 Copyright Clearance Center 
+/*
+ * Copyright 2011-2012 Copyright Clearance Center
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,7 +11,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.package com.copyright.rup.common.test; 
+ * limitations under the License.package com.copyright.rup.common.test;
  */
 
 package com.needhamsoftware.easiermock;
@@ -22,16 +22,16 @@ import java.lang.reflect.Method;
 
 /**
  * TODO: add description
- * 
+ *
  * @author gheck
  */
 public class AnnotatedElementAction {
 
-    public void doTo(Field f, Annotation a) {
-        // default do nothing implementation
-    }
+  public void doTo(Field f, Annotation a) {
+    // default do nothing implementation
+  }
 
-    public void doTo(Method m, Annotation a) {
-        // default do nothing implementation
-    }
+  public void doTo(Method m, Annotation a) {
+    // default do nothing implementation
+  }
 }

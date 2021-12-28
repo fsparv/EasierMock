@@ -1,5 +1,5 @@
-/* 
- * Copyright 2011-2012 Copyright Clearance Center 
+/*
+ * Copyright 2011-2012 Copyright Clearance Center
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,12 +11,10 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.package com.copyright.rup.common.test; 
+ * limitations under the License.package com.copyright.rup.common.test;
  */
 
 package com.needhamsoftware.easiermock;
-
-import static org.junit.Assert.assertEquals;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -24,7 +22,8 @@ import java.lang.reflect.Method;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.NoSuchElementException;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Automates testing of simple Java Bean properties.
@@ -39,9 +38,9 @@ import java.util.NoSuchElementException;
  * corresponds to the name of the field in the class. This restriction is necessary so that
  * cases where two properties are backed by the same field, or the getter and setter don't
  * use the same field are detected as failures.
- * 
+ *
  * <p>This class only supports JUnit for the time being</p>
- * 
+ *
  * <p>Enum types and types shown in the {@link #exampleTypes} map are supported.
  *
  * @author gheck
@@ -53,12 +52,11 @@ public class BeanTester {
   @SuppressWarnings("rawtypes")
   private Map<Class, Object> exampleTypes;
 
-  @SuppressWarnings("rawtypes")
   public BeanTester() {
     this.setExampleTypes(new HashMap<>());
     getExampleTypes().put(Boolean.TYPE, true);
-    getExampleTypes().put(Byte.TYPE, (byte)1);
-    getExampleTypes().put(Short.TYPE, (short)1);
+    getExampleTypes().put(Byte.TYPE, (byte) 1);
+    getExampleTypes().put(Short.TYPE, (short) 1);
     getExampleTypes().put(Character.TYPE, 'a');
     getExampleTypes().put(Integer.TYPE, 1);
     getExampleTypes().put(Long.TYPE, 1L);

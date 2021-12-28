@@ -12,7 +12,7 @@ public class BeanTesterTest {
   public void testGoodProps() {
     BeanTester tester = new BeanTester();
     tester.getExampleTypes().put(GoodTestBean.class, new GoodTestBean());
-    tester.getExampleTypes().put(List.class, new ArrayList());
+    tester.getExampleTypes().put(List.class, new ArrayList<>());
     tester.getExampleTypes().put(NoDefaultConstructor.class, new NoDefaultConstructor("foo"));
     GoodTestBean testBean = new GoodTestBean();
     tester.testBean(testBean);
@@ -21,7 +21,7 @@ public class BeanTesterTest {
   @Test(expected = RuntimeException.class)
   public void testMissingObjectPropType() {
     BeanTester tester = new BeanTester();
-    tester.getExampleTypes().put(List.class, new ArrayList());
+    tester.getExampleTypes().put(List.class, new ArrayList<>());
     GoodTestBean testBean = new GoodTestBean();
     tester.testBean(testBean);
   }
@@ -56,6 +56,7 @@ public class BeanTesterTest {
     BadPropNameSetterBean testBean = new BadPropNameSetterBean();
     tester.testBean(testBean);
   }
+
   @Test(expected = RuntimeException.class)
   public void testSetterMoreThanOneArg() {
     BeanTester tester = new BeanTester();
@@ -177,7 +178,7 @@ public class BeanTesterTest {
 
     // this prop only has setter intentionally
     @SimpleProperty(testInstance = ArrayList.class)
-    public void setListProp(List listProp) {
+    public void setListProp(List<Object> listProp) {
       this.listProp = listProp;
     }
 
@@ -199,12 +200,13 @@ public class BeanTesterTest {
 
     Date simpleDate;
     GoodTestBean simpleObject;
-    List listProp;
+    List<Object> listProp;
     NoDefaultConstructor noDefaultConstructorObject;
 
   }
 
-  class BadPropNameGetterBean {
+  @SuppressWarnings("unused")
+  static class BadPropNameGetterBean {
     @SimpleProperty
     public int getIntProp() {
       return anInt;
@@ -218,7 +220,8 @@ public class BeanTesterTest {
     int anInt;
   }
 
-  class BadPropNameSetterBean {
+  @SuppressWarnings("unused")
+  static class BadPropNameSetterBean {
     @SimpleProperty
     public int getAnInt() {
       return anInt;
@@ -232,7 +235,7 @@ public class BeanTesterTest {
     int anInt;
   }
 
-  class NoDefaultConstructor {
+  static class NoDefaultConstructor {
     String stringProp;
 
     NoDefaultConstructor(String stringProp) {
@@ -241,7 +244,8 @@ public class BeanTesterTest {
 
   }
 
-  class SetterTooManyArgs {
+  @SuppressWarnings("unused")
+  static class SetterTooManyArgs {
     @SimpleProperty
     public int getAnInt() {
       return anInt;

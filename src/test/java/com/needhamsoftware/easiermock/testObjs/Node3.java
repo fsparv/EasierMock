@@ -11,8 +11,9 @@ import com.google.common.collect.ArrayListMultimap;
 
 import java.io.IOException;
 
+@SuppressWarnings("unused")
 public class Node3 {
-  private ArrayListMultimap map;
+  private ArrayListMultimap<?,?> map;
   private int id;
 
   public void setParent(Node3 node) {
@@ -20,10 +21,10 @@ public class Node3 {
 
   public void addNode(Node3 child) throws IOException {
     child.setParent(this);
-    invokeMessaging("add",child.getId());
+    invokeMessaging("add", child.getId());
   }
 
-  public ArrayListMultimap getMap() {
+  public ArrayListMultimap<?,?> getMap() {
     return map;
   }
 
@@ -31,6 +32,7 @@ public class Node3 {
     return id;
   }
 
+  @SuppressWarnings("RedundantThrows")
   public boolean invokeMessaging(String nodeAdded, int i) throws IOException{
     return true;
   }

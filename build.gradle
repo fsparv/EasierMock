@@ -1,3 +1,4 @@
+//file:noinspection GroovyAssignabilityCheck
 import java.text.SimpleDateFormat
 
 apply plugin: 'wrapper'
@@ -5,6 +6,7 @@ apply plugin: 'java'
 apply plugin: 'maven-publish'
 apply plugin: 'signing'
 apply plugin: 'jacoco'
+apply plugin: 'java-library'
 
 compileJava {
     sourceCompatibility = 1.8
@@ -123,7 +125,8 @@ publishing {
 
 dependencies {
     implementation 'net.bytebuddy:byte-buddy:1.12.6'
-    implementation 'org.easymock:easymock:4.3'
+    api 'org.easymock:easymock:4.3' // Not technically ABI but always should be present to use this lib in test code.
+    implementation 'net.bytebuddy:byte-buddy:1.12.6'
     implementation 'junit:junit-dep:4.11' // req as implementation by BeanTester only.
 
     testImplementation 'org.testng:testng:7.4.0'
@@ -142,12 +145,12 @@ jacocoTestReport {
 
 
 task sourcesJar(type: Jar) {
-    archiveClassifier = 'sources'
+    archiveClassifier.set 'sources'
     from sourceSets.main.allJava
 }
 
 task javadocJar(type: Jar) {
-    archiveClassifier = 'javadoc'
+    archiveClassifier.set 'javadoc'
     from javadoc
 }
 

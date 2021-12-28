@@ -20,10 +20,13 @@ import static org.easymock.EasyMock.expect;
 public class TestNgTest {
 
   private static final String NODE_ADDED = "add";
-  @ObjectUnderTest private Node3 cutnode;
-  private Node node = new Node();
-  @Mock private Node child;
-  @Mock private Node3 child3;
+  @ObjectUnderTest
+  private Node3 cutnode;
+  private final Node node = new Node();
+  @Mock
+  private Node child;
+  @Mock
+  private Node3 child3;
 
   public TestNgTest() {
     prepareMocks(this);

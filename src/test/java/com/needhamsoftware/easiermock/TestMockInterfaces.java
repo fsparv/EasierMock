@@ -6,7 +6,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static com.needhamsoftware.easiermock.EasierMocks.*;
+import static com.needhamsoftware.easiermock.EasierMocks.prepareMocks;
+import static com.needhamsoftware.easiermock.EasierMocks.replay;
+import static com.needhamsoftware.easiermock.EasierMocks.reset;
+import static com.needhamsoftware.easiermock.EasierMocks.verify;
 import static org.easymock.EasyMock.expect;
 
 /**
