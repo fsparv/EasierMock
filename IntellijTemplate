@@ -1,0 +1,32 @@
+#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
+#parse("File Header.java")
+
+import com.copyright.easiertest.Mock;
+import com.copyright.easiertest.ObjectUnderTest;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import static com.copyright.easiertest.EasierMocks.*;
+import static org.easymock.EasyMock.expect;
+
+public class ${NAME} {
+    @ObjectUnderTest private Comparable<Object> object;
+    @Mock private Object thing;
+
+  public ${NAME}() {
+    prepareMocks(this);
+  }
+
+  @Before public void setUp() { reset(); }
+  @After public void tearDown() { verify(); }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddObject()  {
+        // May fail in Java 11+ until https://github.com/fsparv/EasierMock/issues/8 is fixed,
+        // but it's just an example, replace with your actual code
+        expect(object.compareTo(thing)).andThrow(new IllegalArgumentException());
+        replay();
+        object.compareTo(thing); // just a random override, never use finalize :)
+    }
+}
