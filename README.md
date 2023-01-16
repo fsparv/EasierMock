@@ -83,6 +83,8 @@ will again go to the mock. This looks something like this:
         node.addNode(child);
       }
     }
+    
+And if you are using IntelliJ IDEA you don't even have to type that boiler plate either. Just install the [IntellijTemplate file](https://github.com/fsparv/EasierMock/blob/master/IntellijTemplate) file by copying and pasting it in a new template at Settings > Editor > File and Code Templates
 
 Credits
 -------
