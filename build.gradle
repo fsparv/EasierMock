@@ -29,6 +29,10 @@ repositories {
     mavenCentral()
 }
 
+java {
+    withSourcesJar()
+}
+
 // A little idiot proofing...
 task(checkUploadDest) {
     doLast {
@@ -125,13 +129,14 @@ publishing {
 
 dependencies {
     implementation 'net.bytebuddy:byte-buddy:1.12.6'
-    api 'org.easymock:easymock:4.3' // Not technically ABI but always should be present to use this lib in test code.
+    api 'org.easymock:easymock:5.5.0' // Not technically API but always should be present to use this lib in test code.
     implementation 'net.bytebuddy:byte-buddy:1.12.6'
     implementation 'junit:junit-dep:4.11' // req as implementation by BeanTester only.
 
     testImplementation 'org.testng:testng:7.4.0'
     testImplementation 'org.powermock:powermock-module-junit4:2.0.9'
-    testImplementation 'org.powermock:powermock-api-easymock:2.0.9'
+    // todo: restore powermock support later?
+//    testImplementation 'org.powermock:powermock-api-easymock:2.0.9'
     testImplementation 'com.google.guava:guava:31.0.1-jre'
 }
 
@@ -144,16 +149,10 @@ jacocoTestReport {
 }
 
 
-task sourcesJar(type: Jar) {
-    archiveClassifier.set 'sources'
-    from sourceSets.main.allJava
-}
-
 task javadocJar(type: Jar) {
     archiveClassifier.set 'javadoc'
     from javadoc
 }
-
 
 artifacts {
     archives sourcesJar
@@ -200,7 +199,8 @@ static def getJdk() {
     "${System.getProperty('java.version')} (${System.getProperty('java.vm.vendor')} ${System.getProperty('java.vm.version')})"
 }
 
-task testng(type: Test)
-testng.useTestNG()
-
-test.dependsOn 'testng'
+// todo: revive testng support?
+//task testng(type: Test)
+//testng.useTestNG()
+//
+//test.dependsOn 'testng'

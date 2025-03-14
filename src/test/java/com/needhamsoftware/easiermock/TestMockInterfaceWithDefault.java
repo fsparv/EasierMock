@@ -25,6 +25,7 @@ import static com.needhamsoftware.easiermock.EasierMocks.replay;
 import static com.needhamsoftware.easiermock.EasierMocks.reset;
 import static com.needhamsoftware.easiermock.EasierMocks.verify;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.expectLastCall;
 import static org.junit.Assert.assertEquals;
 
 public class TestMockInterfaceWithDefault {
@@ -61,7 +62,8 @@ public class TestMockInterfaceWithDefault {
    */
   @Test
   public void testExtendChainHasDefault2() {
-    expect(interface2.noDefault2()).andReturn("foo").anyTimes();
+    interface2.noDefault2();
+    expectLastCall().andReturn("foo").anyTimes();
     replay();
     assertEquals("foo", interface2.hasDefault2());
   }

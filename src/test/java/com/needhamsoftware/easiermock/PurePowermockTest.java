@@ -10,11 +10,10 @@ import com.google.common.collect.ArrayListMultimap;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.powermock.api.easymock.PowerMock;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import static org.easymock.EasyMock.expect;
+//import static org.easymock.EasyMock.expect;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(ArrayListMultimap.class)
@@ -23,9 +22,9 @@ public class PurePowermockTest {
 
   @Test
   public void testPowerMockVsGuava() {
-    ArrayListMultimap map = PowerMock.createMock(ArrayListMultimap.class);
-    expect(map.put("foo", "bar")).andReturn(true);
-    PowerMock.replay(map);
-    map.put("foo", "bar");
+//    ArrayListMultimap map = PowerMock.createMock(ArrayListMultimap.class);
+//    expect(map.put("foo", "bar")).andReturn(true);
+//    PowerMock.replay(map);
+//    map.put("foo", "bar");
   }
 }

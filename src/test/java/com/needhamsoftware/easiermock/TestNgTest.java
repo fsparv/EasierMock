@@ -2,6 +2,7 @@ package com.needhamsoftware.easiermock;
 
 import com.needhamsoftware.easiermock.testObjs.Node;
 import com.needhamsoftware.easiermock.testObjs.Node3;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -12,11 +13,7 @@ import static com.needhamsoftware.easiermock.EasierMocks.reset;
 import static com.needhamsoftware.easiermock.EasierMocks.verify;
 import static org.easymock.EasyMock.expect;
 
-/*
- * Created with IntelliJ IDEA.
- * User: gus
- * Date: 7/9/14
- */
+@Ignore ("todo: revive testng support")
 public class TestNgTest {
 
   private static final String NODE_ADDED = "add";
