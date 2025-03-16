@@ -18,18 +18,16 @@ package com.needhamsoftware.easiermock;
 
 import static net.bytebuddy.matcher.ElementMatchers.isMethod;
 import static net.bytebuddy.matcher.ElementMatchers.nameMatches;
+import static net.bytebuddy.matcher.ElementMatchers.noneOf;
 import static net.bytebuddy.matcher.ElementMatchers.not;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import net.bytebuddy.ByteBuddy;
-import net.bytebuddy.dynamic.DynamicType;
 import net.bytebuddy.dynamic.loading.ClassLoadingStrategy;
-import net.bytebuddy.implementation.DefaultMethodCall;
 import net.bytebuddy.implementation.MethodDelegation;
 import net.bytebuddy.implementation.bind.annotation.AllArguments;
 import net.bytebuddy.implementation.bind.annotation.BindingPriority;
@@ -37,7 +35,6 @@ import net.bytebuddy.implementation.bind.annotation.Origin;
 import net.bytebuddy.implementation.bind.annotation.RuntimeType;
 import net.bytebuddy.implementation.bind.annotation.SuperMethod;
 import net.bytebuddy.implementation.bind.annotation.This;
-import net.bytebuddy.matcher.ElementMatchers;
 import org.easymock.EasyMock;
 import org.objenesis.Objenesis;
 import org.objenesis.ObjenesisStd;
@@ -127,13 +124,12 @@ public class EasierMocks {
 
     if (testObjField != null) {
 
-
       // Now let EasyMock do its thing, which will *ALWAYS* be a cglib enhanced subclass of the above
       // dynamic implementation produced by ByteBuddy
       Object mock = EasyMock.createMock(testObjField.getType());
 
-      Interceptor target = new Interceptor(mock);
-      Class<?> type = dynamicSubclass(testObjField.getType(), target);
+      Interceptor interceptor = new Interceptor(mock);
+      Class<?> type = dynamicSubclass(testObjField.getType(), interceptor);
 
       Objenesis objenesis = new ObjenesisStd();
       ObjectInstantiator<?> thingyInstantiator = objenesis.getInstantiatorOf(type);
@@ -152,24 +148,17 @@ public class EasierMocks {
 
   private static Class<?> dynamicSubclass(Class<?> type1, Interceptor target) {
     ByteBuddy byteBuddy = new ByteBuddy();
-    DynamicType.Builder<?> subclass;
-    // this dispatch on isInterface has not helped...  it seems that bytebuddy is not intercepting interface methods.
-    if (type1.isInterface()) {
-      subclass = byteBuddy.subclass(Object.class).implement(type1).name("dynImplOf$$"+type1.getName());
-    } else {
-      subclass = byteBuddy.subclass(type1);
-    }
 
-    DynamicType.Builder.MethodDefinition.ImplementationDefinition<?> method = subclass
-        .method(ElementMatchers.noneOf(not(isMethod()), nameMatches("\\$jacocoInit")));
-    DynamicType.Builder.MethodDefinition.ReceiverTypeDefinition<?> intercept;
-    if (type1.isInterface()) {
-      intercept = method.intercept(DefaultMethodCall.unambiguousOnly());
-    } else {
-      intercept = method.intercept(MethodDelegation.to(target));
-    }
-
-    return intercept
+    return byteBuddy.subclass(type1)
+        .method(
+            noneOf( // ByteBuddy seems to lack an and() or allOf()
+                not(
+                    isMethod()
+                ),
+                nameMatches("\\$jacocoInit")     // ignore jacoco added method
+            )
+        )
+        .intercept(MethodDelegation.to(target))
         .make()
         .load(type1.getClassLoader(), ClassLoadingStrategy.Default.WRAPPER)
         .getLoaded();
@@ -206,7 +195,7 @@ public class EasierMocks {
     return sNiceMocks.get().toArray();
   }
 
-  public static class Interceptor implements InvocationHandler {
+  public static class Interceptor {
 
     public Interceptor(Object originalMock) {
       this.originalMock = originalMock;
@@ -219,22 +208,19 @@ public class EasierMocks {
     public Object intercept(@This Object self,
                             @Origin Method method,
                             @AllArguments Object[] args,
-                            @SuperMethod Method superMethod) throws Throwable {
+                            @SuperMethod(nullIfImpossible = true) Method superMethod) throws Throwable {
       System.out.println("intercepting");
       if (sState.get() == MockStates.AWAIT_METHOD_UNDER_TEST) {
         sState.set(MockStates.TESTING);
+        if (superMethod == null) {
+          throw new AbstractMethodError("This method is abstract or unimplemented interface with no default");
+        }
         return superMethod.invoke(self, args);
       } else {
         return method.invoke(originalMock, args);
       }
     }
 
-    @Override
-    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-      // todo: use as invocation handler, but legal ways of invoking default method in java 8/9/16 vary?
-      //  could imply MR jar, but ugh.
-      return null;
-    }
   }
 
   private enum MockStates {

@@ -130,7 +130,6 @@ publishing {
 dependencies {
     implementation 'net.bytebuddy:byte-buddy:1.12.6'
     api 'org.easymock:easymock:5.5.0' // Not technically API but always should be present to use this lib in test code.
-    implementation 'net.bytebuddy:byte-buddy:1.12.6'
     implementation 'junit:junit-dep:4.11' // req as implementation by BeanTester only.
 
     testImplementation 'org.testng:testng:7.4.0'
